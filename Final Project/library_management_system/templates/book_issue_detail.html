@@ -1,0 +1,32 @@
+
+{% extends 'index.html'%}
+{% block content %}
+<br>
+<br>
+{% if books %}
+<br>
+<a class="" href="{% url 'display_book' %}">	&#8592;GO BACK<span></span></a> 
+<div class="container" style="padding:30px;">
+<table class="table">   
+  <tr bgcolor="cream">
+      <th> User</th>
+      <th> Issue date</th>
+      <th> Last date of returning</th>
+      <th>Return Status</th>
+  </tr bgcolor="gray">
+      {% for i in books %}
+      <tr>
+          <td><b>{{i.user}}</b></td>
+          <td><b>{{i.issued_date}}</b></td>
+          <td><b>{{i.to_be_return_date}}</b></td>
+          <td><b>Pending</b></td>
+          </td>
+      </tr>
+      {% endfor %}
+    </table>
+</div>
+      {% else %} 
+      <h2><center>No User Issued this book</center></h2>
+      {% endif%}
+{% endblock %}
+

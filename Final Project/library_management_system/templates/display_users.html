@@ -1,0 +1,81 @@
+<style>
+    input[type="search"]::placeholder {
+        text-align: center;
+    }
+    #search{
+        width: 100%;
+    }
+  </style>
+  <head>
+    <script src=
+    "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    </script>
+  </head>
+  {% extends 'index.html'%}
+  {% block content %}
+  <br>
+  <br>
+  <div class="alert" role="alert alert-success">
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+                <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                  {{ message}}
+        </div>
+        {% endfor %}
+    {% endif %}
+  </div>
+<br>
+{% if users %}
+<br>
+<center><input id="search" type="search" class="container" style="padding:1px;width: 500px;" placeholder="SEARCH HERE"></center>
+  <br>
+  <div class="container" style="padding:30px;">
+  <table class="table table-hover table-sm">
+  <tr bgcolor="cream">
+      <th>NAME</th>
+      <th>EMAIL</th>
+      <th> <center>Action</center> </th>
+  </tr>
+      {% for i in users %}
+      <tbody id="table_data">
+      <tr bgcolor="gray">
+          <td><b>{{i.username}}</b></td>
+          <td><b>{{i.email}}</b></td>
+
+          <td> <center>
+            <form method="POST">
+              {% csrf_token %} 
+              <input type="hidden"  value="{{i.id}}" name="id">
+              <button type="submit" class="btn btn-secondary btn active" style="background-color: red;" name="delete">Remove</button>
+              {% if i.is_active %}
+              <button type="submit" class="btn btn-secondary btn active" style="background-color: red;" name="block">Block</button>
+              {% else %}
+              <button type="submit" class="btn btn-secondary btn active" style="background-color: blue" name="block">Unblock</button>
+              {% endif %}
+
+            </form>
+          </center>
+            </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</>
+  </table>
+</div>
+      {% else %} 
+      <h2><center>No User Present</center></h2>
+      {% endif%}
+      <script>
+        $(document).ready(function() {
+            $("#search").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#table_data tr").filter(function() {
+                    $(this).toggle($(this).text()
+                    .toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+  {% endblock %}
+  

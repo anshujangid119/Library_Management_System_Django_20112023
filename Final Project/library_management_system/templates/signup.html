@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Signup Page</title>
+</head>
+{% load static %}
+<h1><center>WELCOME TO LIBRARY MANAGEMENT</center></h1>
+<br>
+<br>
+<style>
+    .signup{
+        text-align: center;
+        margin-top: 100px;
+        border: 5px solid;
+        padding: 20px;
+        margin-right: 50pxs;
+        border-radius: 25px;
+    }
+        img{
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            z-index: -1;
+            opacity: 0.7;
+        }
+        h3,label,input{
+            color: black;
+            font-size: large;   
+        }
+    
+</style>
+<body>
+    <form method="post">
+        {% csrf_token %} 
+        <div class = "signup" style="margin-right: 400px;margin-left: 400px;">
+            <h3 style="margin-top: 20px;"><center><u><b>Sign Up Here</b></u></center></h3>
+            <label for="username">Username</label>
+            <input type="text" placeholder="Username" name="username" id="username">
+            <br>
+            <br>
+            <label for="email">Email</label>
+            <input type="email" placeholder="Email" name="email" id="email">
+            <br>
+            <br>
+            <label for="password1">Password</label>
+            <input type="password" placeholder="Password" id="password1" name="password1">
+            <br>
+            <br>
+            <label for="password2">Confirm Password</label>
+            <input type="password" placeholder="Confirm Password" id="password2" name="password2">
+            <br>
+            <br>
+            <button type="submit">Signup</button>
+            <br>
+            <br>
+            <a href="{% url 'login' %}" >I have already account ,</a>
+            <a href="{% url 'admin' %}" >For Admin</a> 
+        </form>
+        </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+{% block content %} 
+<br>
+<br>
+<br>
+<br>
+<h><center><b>TOTAL FINE TILL NOW {{fine}}</b></center></h>
+<br>
+<br>
+{% if request.user.is_superuser %}         
+<a class="" href="{% url 'all_user_fine' %}">	&#8592;GO BACK<span></span></a> 
+{% endif %}
+{% if items %}
+<div class="container" style="padding:30px;">
+    <table class="table">
+      <tr bgcolor="cream">
+          <th> Book Name</th>
+          <th> Author Name</th>
+          <th> Issue Date</th>
+          <th> Last date for Returning</th>
+          <th> Return date</th>  
+          <th>Fine</th> 
+      </tr>
+          {% for i in items %}
+          <tr bgcolor="gray">
+              <td><b>{{i.book.book_title}}</b></td>
+              <td><b>{{i.book.book_author}}</b></td>
+              <td><b>{{i.issued_date}}</b></td>
+              <td><b>{{i.to_be_return_date}}</b></td>
+              <td><b>{{i.return_date}}</b></td>
+              <td><b>{{i.book_fine}}</b></td>
+              </td>
+          </tr>
+          {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+    {% endblock %}

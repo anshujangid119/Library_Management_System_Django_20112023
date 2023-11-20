@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <style>
+        .login{
+            text-align: center;
+            margin-top: 150px;
+            border: 5px solid;
+            padding: 70px;
+            margin-right: 50pxs;
+            border-radius: 25px;
+        }   
+    </style>
+<h1><center>WELCOME TO LIBRARY MANAGEMENT</center></h1>
+    <form method="post">
+        {% csrf_token %} 
+        <div class = "login" style="margin-right: 400px;margin-left: 400px;">
+            <h3 style="margin-top: 20px;"><center><u><b>Login Here</b></u></center></h3>
+            <label for="username   ">Username</label>
+            <input type="text" placeholder="Enter Username" id="username" name="username">
+            <br>
+            <br>
+            <label for="password   ">Password</label> 
+            <input type="password" placeholder="Password" id="password" name="pass">
+            <br>
+            <br>
+            <button type="submit">Log In</button>
+            <br>
+            <br>
+            <a href="{% url 'signup' %}" >Create a account ,</a>
+            <a href="{% url 'admin' %}" >For Admin</a>
+        </div>      
+    </form>   
+</body>
+</html>

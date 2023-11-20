@@ -1,0 +1,22 @@
+{% extends 'index.html'%}
+{% block content %}
+<br>
+<br>
+<style>
+    p
+    {
+        margin-top: 10px;
+        border: 1px solid;
+        padding: 5px;
+     
+    }
+</style>
+{% if feedbacks %}
+{% for i in feedbacks %}
+<p>{{i.text}}</p>
+{% endfor %}
+{% else %}
+<br>
+<h3><center>NO FEEDBACKS TILL NOW</center></h3>
+{% endif %}
+{% endblock %}

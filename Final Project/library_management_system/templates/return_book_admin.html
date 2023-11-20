@@ -1,0 +1,73 @@
+<style>
+    input[type="search"]::placeholder {
+        text-align: center;
+    }
+    #search{
+        width: 100%;
+    }
+</style>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+{% extends 'index.html'%}
+{% block content %}
+<br>
+<br>
+<div class="alert" role="alert alert-success">
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+                <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                  {{ message}}
+        </div>
+        {% endfor %}
+    {% endif %}
+  </div>
+{% if  books %}
+<br>
+<center><input id="search" type="search" class="container" style="padding:1px;width: 500px;" placeholder="SEARCH HERE"></center>
+<br>
+<div class="container" style="padding:30px;">
+    <table class="table table-hover table-sm">
+      <tr bgcolor="cream">
+          <th>user</th>
+          <th>BOOK NAME</th>
+          <th>AUTHOR NAME</th>
+          <th>LAST DATE FOR RETURNING</th>
+          <th>ACTION</th>
+      </tr>
+      <tbody id="table_data">
+          {% for i in books %} 
+          <tr bgcolor="gray">
+              <td><b>{{i.user}}</b></td>
+              <td><b>{{i.book.book_title}}</b></td>
+              <td><b>{{i.book.book_author}}</b></td>
+              <td><b>{{i.to_be_return_date}}</b></td>
+              <td>
+                <form method="POST">
+                  {% csrf_token %} 
+                  <input type="hidden"  value="{{i.book.id}}" name="book_id">
+                  <input type="hidden"  value="{{i.user.id}}" name="user">
+                  <button type="submit" class="btn btn-secondary btn active" style="background-color: blue;">Return</button>
+              </form>
+              </td>
+          </tr> 
+          {% endfor %}
+        </tbody>
+</table>
+</div>
+{% else %}
+<h2><center>No Book Issued</center></h2>
+{% endif %}
+<script>
+    $(document).ready(function() {
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#table_data tr").filter(function() {
+                $(this).toggle($(this).text()
+                .toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+{% endblock %}

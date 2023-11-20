@@ -1,0 +1,110 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light,navbar navbar-dark bg-dark" id="navi">
+    <a class="navbar-brand" href="{% url 'home' %}">WELCOME {{request.user|upper}} </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        {% if not request.user.is_superuser %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'issue' %}">Books <span class="sr-only">(current)</span></a>
+        </li>
+        {% endif %} 
+        <li class="nav-item active">          
+          <a class="nav-link" href="{% url 'view_pdf' %}">Online Books  <span class="sr-only">(current)</span></a>
+        </li>  
+        {% if not request.user.is_superuser %}
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'return' %}">My Books <span class="sr-only">(current)</span></a>
+        </li>
+        {% endif %}
+        {% if not request.user.is_superuser %}
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'history' %}">History  <span class="sr-only">(current)</span></a>
+          </li>  
+          {% endif %} 
+          {% if request.user.is_superuser %}
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'add' %}">Add Book  <span class="sr-only">(current)</span></a>
+          </li>  
+          {% endif %} 
+          {% if request.user.is_superuser %}
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'issue_req' %}">Request <span class="sr-only">(current)</span></a>
+          </li>  
+          {% endif %} 
+          {% if request.user.is_superuser %}
+          <li class="nav-item active">          
+            <a class="nav-link" href="{% url 'display_book' %}">Edit Book  <span class="sr-only">(current)</span></a>
+          </li>  
+          {% endif %} 
+          {% if request.user.is_superuser %}
+          <li class="nav-item active">          
+            <a class="nav-link" href="{% url 'display_users' %}">Users  <span class="sr-only">(current)</span></a>
+          </li>  
+    
+          {% endif %}
+          {% if request.user.is_superuser %}
+          <li class="nav-item active">          
+            <a class="nav-link" href="{% url 'user_records' %}">User Records  <span class="sr-only">(current)</span></a>
+          </li>  
+          {% endif %}
+          {% if request.user.is_superuser %}
+          <li class="nav-item active">          
+            <a class="nav-link" href="{% url 'return_book_admin' %}">Return  <span class="sr-only">(current)</span></a>
+          </li>  
+          {% endif %}
+          {% if request.user.is_superuser %}
+          <li class="nav-item active">          
+            <a class="nav-link" href="{% url 'issue_book_admin' %}">Issue <span class="sr-only">(current)</span></a>
+          </li>  
+          {% endif %} 
+          {% if request.user.is_superuser %}
+          <li class="nav-item active">          
+            <a class="nav-link" href="{% url 'records' %}">Issue Records    <span class="sr-only">(current)</span></a>
+          </li>  
+          {% endif %} 
+          {% if request.user.is_superuser %}
+          <li class="nav-item active">          
+            <a class="nav-link" href="{% url 'admin_feedback' %}">Feedbacks <span class="sr-only">(current)</span></a>
+          </li>  
+          {% endif %} 
+          {% if request.user.is_superuser %}
+          <li class="nav-item active">          
+            <a class="nav-link" href="{% url 'add_pdf' %}">Add Pdf <span class="sr-only">(current)</span></a>
+          </li>  
+          {% endif %} 
+          
+          {% if not request.user.is_superuser %}
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'pending_req' %}">Requests  <span class="sr-only">(current)</span></a>
+          </li>  
+          {% endif %} 
+          {% if not request.user.is_superuser %}
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'fine_user' %}">Fine <span class="sr-only">(current)</span></a>
+          </li>
+          {% endif %} 
+          {% if request.user.is_superuser %}
+          <li class="nav-item active">          
+            <a class="nav-link" href="{% url 'all_user_fine' %}">Fines  <span class="sr-only">(current)</span></a>
+          </li>  
+          {% endif %}
+
+          {% if not request.user.is_superuser %}
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'user_feedback' %}">Feedback  <span class="sr-only">(current)</span></a>
+          </li>  
+          {% endif %} 
+        </li>
+      </ul>
+      <a href="{% url 'logout' %}" class="btn btn-secondary active" role="button" aria-pressed="true">Logout </a>
+    </div>
+  </nav>
+  {% block content %}
+  {% endblock %}
+</html>

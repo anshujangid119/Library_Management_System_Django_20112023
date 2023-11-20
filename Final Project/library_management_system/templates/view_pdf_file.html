@@ -1,0 +1,28 @@
+
+{% extends 'index.html' %}
+{% block content %}
+<br>
+<br>
+<br>
+<div class="container" style="padding:30px;">
+  <table class="table table-hover table-sm">
+    <thead class="thead">
+      <tr bgcolor="cream">
+        <th>NAME</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="table_data">
+      {% for i in names %}
+      <tr bgcolor="gray">
+        <td><b>{{i.name}}</b></td>
+        <td>
+          <a href="{{ i.document.url }}" target="_self" class="btn btn-secondary btn-active" style="background-color: blue;">  Read  </a>
+          <!-- <a href="{{ i.document.url }}"  class="btn btn-secondary btn-active" style="background-color:slategrey;"Download="" >Download</a> -->
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

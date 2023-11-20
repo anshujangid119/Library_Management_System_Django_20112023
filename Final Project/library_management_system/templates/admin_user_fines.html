@@ -1,0 +1,65 @@
+<style>
+    input[type="search"]::placeholder {
+        text-align: center;
+    }
+    #search{
+        width: 100%;
+    }
+  </style>
+  <head>
+    <script src=
+    "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    </script>
+  </head>
+  {% extends 'index.html'%}
+  {% block content %}
+<br>
+<br>
+{% if users %}
+<br>
+<center><input id="search" type="search" class="container" style="padding:1px;width: 500px;" placeholder="SEARCH HERE"></center>
+  <br>
+
+  <div class="container" style="padding:30px;">
+  <table class="table table-hover table-sm">
+    <thead class = "thead">
+  <tr bgcolor="cream">
+      <th>NAME</th>
+      <th>EMAIL</th>
+      <th>Action</th>
+  </tr>
+      {% for i in users %}
+      <tbody id="table_data">
+      <tr bgcolor="gray">
+          <td><b>{{i.username}}</b></td>
+          <TD><b>{{i.email}}</b></TD>
+          <td>
+            <form method="POST" action="">
+              {% csrf_token %} 
+              <input type="hidden"  value="{{i.id}}" name="id">
+              <button type="submit" class="btn btn-secondary btn active" style="background-color:blue">Fine Status</button>
+            </form>
+            </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</thead>
+  </table>
+  </div>
+
+      {% else %} 
+      <h2><center>No User Present</center></h2>
+      {% endif%}
+      <script>
+        $(document).ready(function() {
+            $("#search").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#table_data tr").filter(function() {
+                    $(this).toggle($(this).text()
+                    .toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+  {% endblock %}
+  

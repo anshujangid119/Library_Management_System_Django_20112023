@@ -1,0 +1,34 @@
+{% extends 'index.html'%}
+{% block content %}
+<br>
+<br>
+<div class="alert" role="alert alert-success">
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+                <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                  {{ message}}
+        </div>
+        {% endfor %}
+    {% endif %}
+  </div>
+<style>
+    form
+    {
+        text-align: center;
+        margin-top: 100px;
+        border: 5px solid;
+        padding: 70px;
+        margin-right: 300px;
+        margin-left: 300px;
+        border-radius: 25px;
+    }
+</style>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="formclass">
+        {{form.as_p}}
+        <button type="submit ">Save&#xf0c7;</button>
+    </div>
+    </form>
+{% endblock %}

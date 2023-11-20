@@ -1,0 +1,67 @@
+<style>
+img{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: -1;
+    opacity: 0.7;
+}
+h3,p,u{
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    font-size: x-large;   
+}
+center{
+    margin-top: 20px;
+}
+</style>
+{% extends 'index.html' %}
+{% block content %} 
+<br>
+<br>
+{% load static %}
+{% if not request.user.is_superuser %}
+<img src="{% static 'libraryimg.jpg' %}">
+<!-- <img src="{% static 'library4.jpg' %}"> -->
+<br>
+<br>
+
+
+{% if books_quantity %}
+<h3><center><u>Instructions</u></center></h3>
+<br>
+<p>    --> You have issued {{books_quantity}} book and make sure that you have to return it on or before the return date</p>
+{% endif %}
+<br>
+<br>
+{% if near_due_date %}
+<h3><center><u>Return Book Status</u></center></h3>
+<br>
+{% for i in near_due_date %}
+{% if i.days > 0 %}
+<p> -->  Reamining {{i.days}} days for book "{{i.book}}"</p>
+{% elif i.days == 0 %}
+<p>  --> Today is the return date for "{{i.book}}" book</p>
+{% else %}
+<p>  --> Return date for "{{i.book}}" is {{i.days|stringformat:"+d"|slice:"1:" }} days ago, Go and return it </p>   
+{% endif %}
+{% endfor %}
+{% endif %}
+
+<br>
+<br>
+<br>
+<h3><center><u>Notifications</u></center></h3>
+<br>
+{% for i in book %}
+<p>    --> New book arrived "{{i.book_title}}" you can issue that </p>
+{% endfor %}
+{% else %}
+<img src="{% static 'library4.jpg' %}">
+<h3><center>NOTIFICATIONS</center></h3>
+<p>    --> Kindly Check the <a href="{% url 'issue_req' %}"> Requests </a> for issue book</p>
+<p>    --> Kindly Check the <a href="{% url 'admin_feedback' %}">Feedbacks</a></p>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,6 @@
+class InSufficientData(Exception):
+    pass
+
+    
+    
+              

@@ -1,0 +1,29 @@
+
+{% extends 'index.html'%}
+{% block content %}
+<br>
+<br>
+{% if books %}
+<div class="container" style="padding:30px;">
+<table class="table">
+  <tr bgcolor="cream">
+      <th> Book Name</th>
+      <th> Author Name</th>
+      <th> Status</th>
+  </tr>
+      {% for i in books %}
+      <tr bgcolor="gray">
+          <td><b>{{i.book.book_title}}</b></td>
+          <td><b>{{i.book.book_author}}</b></td>
+          <td><b>Pending</b></td>
+          </td>
+      </tr>
+
+      {% endfor %}
+    </table>
+</div>
+      {% else %} 
+      <h2><center>No Pending Record </center></h2>
+      {% endif%}
+{% endblock %}
+

@@ -1,0 +1,61 @@
+<style>
+    input[type="search"]::placeholder {
+        text-align: center;
+    }
+    #search{
+        width: 100%;
+    }
+</style>
+<head>
+    <script src=
+    "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    </script>
+</head>
+{% extends 'index.html'%}
+{% block content %}
+<br>
+<br>
+{% if records %} 
+<br>
+<center><input id="search" type="search" class="container" style="padding:1px;width: 500px;" placeholder="SEARCH HERE"></center>
+    <br>
+    <div class="container" style="padding:30px;">
+<table class="table table-hover table-sm">
+    <thead class = "thead">
+  <tr bgcolor="cream">
+    <th>USER NAME</th>
+     <th>Book Name</th>
+      <th>AUTHOR NAME</th>
+      <th>ISSUE DATE</th>
+      <th>TO_BE_RETURN_DATE</th>
+      
+  </tr>
+  <tbody id="table_data">
+      {% for i in records %}
+      <tr>
+          <td><b>{{i.user}}</b></td>
+          <td><b>{{i.book.book_title}}</b></td>
+          <td><b>{{i.book.book_author}}</b></td>
+          <td><b>{{i.issued_date}}</b></td>
+          <td><b>{{i.to_be_return_date}}</b></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</thead>
+    </table>
+    </div>
+    {% else %}
+    <h2><center>No Book Available</center></h2>
+    {% endif %}
+      <script>
+        $(document).ready(function() {
+            $("#search").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#table_data tr").filter(function() {
+                    $(this).toggle($(this).text()
+                    .toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+{% endblock %}
